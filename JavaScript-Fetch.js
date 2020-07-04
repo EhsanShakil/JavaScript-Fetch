@@ -50,3 +50,17 @@ const fetchData = async () => {
     }
 }
 fetchData()
+
+const covidAPI = async () => {
+	try {
+	const covid = await fetch('https://covid19.mathdro.id/api')
+	const data = await covid.json()
+	console.log('Total Cases:',data.confirmed.value)
+	console.log('Recovered Cases:',data.recovered.value)
+	console.log('Deaths Cases:',data.deaths.value)
+	}
+	catch(error) {
+		console.log('Data Not Found', error)
+	}
+}
+covidAPI()
