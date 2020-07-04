@@ -27,3 +27,26 @@ const postData = async () => {
 
 }
 postData()
+
+const fetchData = async () => {
+	try {
+	const users =  await fetch('https://jsonplaceholder.typicode.com/users')
+	const userData = await users.json()
+	console.log(userData)
+
+	const posts =  await fetch('https://jsonplaceholder.typicode.com/posts')
+	const postData = await posts.json()
+	console.log(postData)
+
+	const result = await userData.map((obj) => ({
+        id: obj.id,
+        username: obj.username,
+        post: postData.filter(item => obj.id === item.userId)
+    }));
+    console.log(result);
+    }
+    catch(error) {
+    	throw new Error('API Not Found', error)
+    }
+}
+fetchData()
